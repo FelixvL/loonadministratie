@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 public class Werknemer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;   // let op long
+	private long id;   // let op long dubbelcheck
 	
 	private String voornaam;
 	private String achternaam;
