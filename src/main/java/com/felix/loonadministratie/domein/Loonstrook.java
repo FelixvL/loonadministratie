@@ -15,6 +15,10 @@ public class Loonstrook {
 	private int maand;
 	private int bedrag;
 	
+	
+	
+	
+	
 	public long getId() {
 		return id;
 	}

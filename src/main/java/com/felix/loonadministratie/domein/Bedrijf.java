@@ -18,6 +18,11 @@ public class Bedrijf {
 	private int huisnummer;
 	private LocalDate oprichtingsDatum;
 	
+	
+	
+	
+	
+	
 	public long getId() {
 		return id;
 	}

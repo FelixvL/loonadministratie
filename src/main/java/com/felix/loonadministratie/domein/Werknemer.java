@@ -26,6 +26,10 @@ public class Werknemer {
 	@OneToMany
 	private List<Loonstrook> loonstroken;
 
+	
+	
+	
+	
 	public long getId() {
 		return id;
 	}
