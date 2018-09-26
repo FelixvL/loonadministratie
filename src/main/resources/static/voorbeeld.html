@@ -1,38 +1,43 @@
 <html>
     <head>
         <script>
-            function testenmaar(){
-                var deDom = document.getElementsByTagName("html");
-                console.log(deDom);
-
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function(){
+            function klikmaar(){
+                //http://localhost:8082/bedrijf
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange  = function(){
+                    console.log(this.readyState);
+                    console.log(this.responseText);
                     if(this.readyState == 4){
                         var alleBedrijven = JSON.parse(this.responseText);
-                        voegBedrijvenAanOverzichtToe(alleBedrijven);
+                        console.log(alleBedrijven);
+                        laatAlleBedrijvenZien(alleBedrijven);
                     }
                 }
-                xhr.open("GET", "http://localhost:8082/bedrijf", true);
-                xhr.send();
+                xmlhttp.open("GET","http://localhot:8082/berijf",true);
+                xmlhttp.send();
             }
-            function voegBedrijvenAanOverzichtToe(deBedrijven){
-                var returnString = "<tr><th>id</th><th>naam</th></tr>";
-                for(x = 0; x < deBedrijven.length; x++){
-                    returnString += "<tr><td>"+deBedrijven[x].id+"</td><td>"+deBedrijven[x].naam+"</td></tr>";
+            function laatAlleBedrijvenZien(deBedrijven){
+                
+                var deDiv = document.getElementById("mercure");
+                for(x = 0 ; x < deBedrijven.length ; x++){
+                    var kleur = 'blue';
+                    if(deBedrijven[x].naam == 'Wibra'){
+                        kleur = 'red';
+                    }
+                    var jojo = '<p style="background-color:'+kleur+';">'+deBedrijven[x].naam+'</p>';
+                    deDiv.innerHTML = deDiv.innerHTML + jojo;
                 }
-                var tabel = document.getElementById('debedrijvendiv');
-                tabel.innerHTML = returnString;
-                alert(tabel.baseURI);
-                tabel.style.backgroundColor = 'green';
             }
         </script>
     </head>
     <body>
-        <input type=button value=ziebedrijven onclick=testenmaar()>
-        <table id=debedrijvendiv>
+        <input type=button value=laadBedrijven onclick=klikmaar()>
+
+        <input type=button value=fftesten onclick=laatAlleBedrijvenZien()>
+
+        <div id=mercure>  </div>
 
 
 
-        </table>
     </body>
 </html>
