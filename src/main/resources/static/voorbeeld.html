@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <script>
+            function testenmaar(){
+                var deDom = document.getElementsByTagName("html");
+                console.log(deDom);
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(){
+                    if(this.readyState == 4){
+                        var alleBedrijven = JSON.parse(this.responseText);
+                        voegBedrijvenAanOverzichtToe(alleBedrijven);
+                    }
+                }
+                xhr.open("GET", "http://localhost:8082/bedrijf", true);
+                xhr.send();
+            }
+            function voegBedrijvenAanOverzichtToe(deBedrijven){
+                var returnString = "<tr><th>id</th><th>naam</th></tr>";
+                for(x = 0; x < deBedrijven.length; x++){
+                    returnString += "<tr><td>"+deBedrijven[x].id+"</td><td>"+deBedrijven[x].naam+"</td></tr>";
+                }
+                var tabel = document.getElementById('debedrijvendiv');
+                tabel.innerHTML = returnString;
+                alert(tabel.baseURI);
+                tabel.style.backgroundColor = 'green';
+            }
+        </script>
+    </head>
+    <body>
+        <input type=button value=ziebedrijven onclick=testenmaar()>
+        <table id=debedrijvendiv>
+
+
+
+        </table>
+    </body>
+</html>

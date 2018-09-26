@@ -31,8 +31,7 @@ public class BedrijfEndpoint {
 	@PutMapping
 	public Bedrijf bedrijfUpdaten(@RequestBody Bedrijf bedrijf) {
 		return bedrijfService.slaBedrijfOp(bedrijf);
-	}
-	
+	}	
 	@DeleteMapping("bedrijf/{id}")
 	public void bedrijfVerwijderen(@PathVariable Long id) {
 		bedrijfService.verwijderBedrijf(id);
