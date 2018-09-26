@@ -16,4 +16,11 @@ public class BedrijfService {
 		return bedrijfRepository.findAll();
 	} 
 
+	public Bedrijf slaBedrijfOp(Bedrijf bedrijf) {
+		return bedrijfRepository.save(bedrijf);
+	}
+	
+	public void verwijderBedrijf(Long id) {
+		bedrijfRepository.deleteById(id);
+	}
 }
