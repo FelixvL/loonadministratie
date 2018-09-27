@@ -1,6 +1,30 @@
 <html>
     <head>
         <script>
+            var baseUrl = "http://localhost:8082/";
+            function letsgo(zomaar){
+                alert(zomaar);
+            }
+            function voegbedrijftoe(){
+                var bedrijf = {};
+                bedrijf.naam = document.getElementById("naambedrijf").value;
+                bedrijf.straat = document.getElementById("straatbedrijf").value;
+                bedrijf.huisnummer = document.getElementById("huisnummerbedrijf").value;
+                bedrijf.oprichtingsDatum = document.getElementById("oprichtdatumbedrijf").value;
+                bedrijf = JSON.stringify(bedrijf);
+                postData(bedrijf, "bedrijf", letsgo);
+            }
+            function postData(postObj, url, callback){
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(){
+                    if(this.readyState == 4){
+                        callback(this.responseText);
+                    }
+                }
+                xhr.open("POST", baseUrl+url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(postObj);
+            }
             function klikmaar(){
                 //http://localhost:8082/bedrijf
                 var xmlhttp = new XMLHttpRequest();
@@ -13,28 +37,37 @@
                         laatAlleBedrijvenZien(alleBedrijven);
                     }
                 }
-                xmlhttp.open("GET","http://localhot:8082/berijf",true);
+                xmlhttp.open("GET","http://localhost:8082/bedrijf",true);
                 xmlhttp.send();
             }
-            function laatAlleBedrijvenZien(deBedrijven){
-                
+            function laatAlleBedrijvenZien(deBedrijven){                
                 var deDiv = document.getElementById("mercure");
+                deDiv.innerHTML = "";
                 for(x = 0 ; x < deBedrijven.length ; x++){
-                    var kleur = 'blue';
+                    var kleur = 'lightblue';
                     if(deBedrijven[x].naam == 'Wibra'){
-                        kleur = 'red';
+                        kleur = 'orange';
                     }
                     var jojo = '<p style="background-color:'+kleur+';">'+deBedrijven[x].naam+'</p>';
                     deDiv.innerHTML = deDiv.innerHTML + jojo;
                 }
             }
         </script>
+        <style>
+            p{
+                padding:5px;
+                width:300px;
+            }
+        </style>
     </head>
     <body>
+            Naam:<input type=text id=naambedrijf >
+            Oprichtdatum:<input type=date id=oprichtdatumbedrijf >
+            Straat:<input type=text id=straatbedrijf >
+            Huisnummer:<input type=text id=huisnummerbedrijf >
+            <input type=button onclick=voegbedrijftoe() value=voegbedrijftoe>
+        <hr>
         <input type=button value=laadBedrijven onclick=klikmaar()>
-
-        <input type=button value=fftesten onclick=laatAlleBedrijvenZien()>
-
         <div id=mercure>  </div>
 
 
