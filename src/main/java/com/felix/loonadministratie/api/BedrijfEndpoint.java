@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.felix.loonadministratie.domein.Bedrijf;
+import com.felix.loonadministratie.domein.Werknemer;
+import com.felix.loonadministratie.persistence.AanneemService;
 import com.felix.loonadministratie.persistence.BedrijfService;
 
 @RestController
@@ -19,6 +21,9 @@ import com.felix.loonadministratie.persistence.BedrijfService;
 public class BedrijfEndpoint {
 	@Autowired
 	private BedrijfService bedrijfService;
+	
+	@Autowired
+	private AanneemService aanneemService;	
 	
 	@GetMapping
 	public Iterable<Bedrijf> ffProberen() {		
@@ -37,5 +42,17 @@ public class BedrijfEndpoint {
 		bedrijfService.verwijderBedrijf(id);
 	}
 
+	@PostMapping("aannemen/{id}")
+	public Werknemer werknemerAannemen(@PathVariable Long id, @RequestBody Werknemer werknemer) {
+		System.out.println("bekijken");
+		return aanneemService.slaWerknemerOp(id, werknemer);
+	}
 	
 }
+
+
+
+
+
+
+
