@@ -49,21 +49,33 @@
                     if(deBedrijven[x].naam == 'Wibra'){
                         kleur = 'orange';
                     }
-                    var jojo = '<p style="background-color:'+kleur+';">'+deBedrijven[x].naam+'</p>';
+                    var jojo = '<p style="background-color:'+kleur+';" onclick=aannemen('+deBedrijven[x].id+')>'+deBedrijven[x].naam+'</p>';
                     deDiv.innerHTML = deDiv.innerHTML + jojo;
                 }
             }
+            function aannemen(hetBedrijf){
+               document.location = 'werknemeraannemen.html?bedrijfsid='+hetBedrijf;
+            }
         </script>
         <style>
-            p{
+            span{
+                
+            }
+            p span{
                 padding:5px;
                 width:300px;
+            }
+            .invoer{
+                background-color: red;
+            }
+            #uitvoer{
+                background-color:blue;
             }
         </style>
     </head>
     <body>
-            Naam:<input type=text id=naambedrijf >
-            Oprichtdatum:<input type=date id=oprichtdatumbedrijf >
+            Naam:<input class=invoer type=text id=naambedrijf >
+            Oprichtdatum:<input class=invoer id=uitvoer type=date id=oprichtdatumbedrijf >
             Straat:<input type=text id=straatbedrijf >
             Huisnummer:<input type=text id=huisnummerbedrijf >
             <input type=button onclick=voegbedrijftoe() value=voegbedrijftoe>
